@@ -42,6 +42,61 @@ Below is the final annotated output video.
 
 - Python 3.8+
 - (Optional) Docker
+- (Optional) Google Colab account for cloud-based execution
+
+---
+
+## ☁️ Running in Google Colab
+
+For easy cloud-based execution without local setup, you can use the provided `main.ipynb` notebook in Google Colab:
+
+### Setup Instructions
+
+1. **Open the notebook in Google Colab:**
+   - Upload `main.ipynb` to your Google Drive or open it directly from GitHub
+   - Open with Google Colab
+
+2. **Configure GitHub credentials:**
+   - In Colab, go to the left sidebar and click on the key icon (Secrets)
+   - Add the following secrets:
+     - `username`: Your GitHub username
+     - `token`: Your GitHub personal access token
+     - `branch`: The branch you want to pull (optional, defaults to 'main')
+
+3. **Setup Google Drive access:**
+   - Create a folder named `sarasyn` in your Google Drive
+   - Download the required model files and place them in this folder:
+     - `ball_detector_model.pt`
+     - `court_keypoint_detector.pt` 
+     - `player_detector.pt`
+   - The notebook will automatically copy these models to the correct location
+
+4. **Run the notebook cells in order:**
+   - **Cell 1**: Clones the repository and lists the project structure
+   - **Cell 2**: Mounts Google Drive and copies model files
+   - **Cell 3**: Installs required dependencies
+   - **Cell 4**: Runs the analysis on `video_3.mp4` and generates output
+
+### What the Colab notebook does:
+
+- Automatically clones the latest version of the repository
+- Sets up the Python environment with all dependencies
+- Downloads your pre-trained models from Google Drive
+- Runs the basketball analysis pipeline on the specified video
+- Generates the annotated output video in the `output_videos/` folder
+
+### Customizing the analysis:
+
+You can modify Cell 4 to analyze different videos or change analysis parameters:
+
+```python
+!cd /content/basketball_analysis && python main.py \
+  input_videos/your_video.mp4 \
+  --output_video output_videos/your_output.mp4 \
+  --player_detector_path models/player_detector.pt \
+  --ball_detector_path models/ball_detector_model.pt \
+  --court_keypoint_detector_path models/court_keypoint_detector.pt
+```
 
 ---
 
